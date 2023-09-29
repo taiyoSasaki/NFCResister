@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">NFCResister</string>
+
+    <!-- ホーム画面用文字列 -->
+    <string name="home_title">NFCカードの登録/編集ができます\n追加は＋、削除は⊖をおしてください</string>
+    <string name="tab_title_A">機能A</string>
+    <string name="tab_title_B">機能B</string>
+    <string name="tab_title_C">機能C</string>
+
+
+</resources>
