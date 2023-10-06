@@ -17,6 +17,7 @@ import kotlinx.coroutines.*
 import java.io.FileWriter
 import java.lang.Exception
 
+@Suppress("DEPRECATION")
 class CsvActivity : AppCompatActivity() {
 
     private val PERMISSIONS_REQUEST_CODE = 100
@@ -52,19 +53,15 @@ class CsvActivity : AppCompatActivity() {
                 .setMessage("csvファイルを読み込むと、現在保存されているカード情報がすべて削除されます。よろしいですか？")
                 .setPositiveButton("OK") { _, _ ->
                     //パーミッションの状態確認
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                            //許可されている
-                            openReadCsv()
-                        } else {
-                            //許可されていないのでダイアログを表示する
-                            requestPermissions(
-                                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                                PERMISSIONS_REQUEST_CODE
-                            )
-                        }
-                    } else {  //Android5.0以下
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                        //許可されている
                         openReadCsv()
+                    } else {
+                        //許可されていないのでダイアログを表示する
+                        requestPermissions(
+                            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                            PERMISSIONS_REQUEST_CODE
+                        )
                     }
                 }
                 .setNeutralButton("キャンセル", null)
@@ -77,13 +74,13 @@ class CsvActivity : AppCompatActivity() {
     private fun openReadCsv() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
         intent.addCategory(Intent.CATEGORY_OPENABLE)
-        intent.setType("text/*")
+        intent.type = "text/*"
         startActivityForResult(intent, READ_REQUEST_CODE)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             val uri: Uri? = data?.data
             if (uri != null) {
@@ -93,6 +90,7 @@ class CsvActivity : AppCompatActivity() {
     }
 
     //csvインポート
+    @SuppressLint("Recycle")
     private fun importCsv(uri: Uri) {
         val fileUri = Uri.parse(uri.toString())
 
