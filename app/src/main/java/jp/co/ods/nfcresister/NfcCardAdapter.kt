@@ -19,7 +19,7 @@ class NfcCardAdapter(private val context: Context): RecyclerView.Adapter<Recycle
     var onClickRemove: ((NfcCard) -> Unit)? = null
 
     override fun getItemCount(): Int {
-        return return if(items.isEmpty()) 1 else items.size
+        return if(items.isEmpty()) 1 else items.size
     }
 
     override fun getItemViewType(position: Int): Int {

@@ -6,9 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class ViewPagerAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter(fragmentActivity) {
 
-    val titleIds = listOf(R.string.tab_title_A, R.string.tab_title_B, R.string.tab_title_C)
-
-    val fragments = listOf(NfcCardAFragment(), NfcCardBFragment(), NfcCardCFragment())
+    private var fragments : ArrayList<NfcCardFragment> = arrayListOf()
 
     override fun getItemCount(): Int {
         return fragments.size
@@ -16,6 +14,14 @@ class ViewPagerAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter
 
     override fun createFragment(position: Int): Fragment {
         return fragments[position]
+    }
+
+    fun addFragment(fragment: NfcCardFragment) {
+        fragments.add(fragment)
+    }
+
+    fun clearFragment() {
+        fragments.clear()
     }
 
 }

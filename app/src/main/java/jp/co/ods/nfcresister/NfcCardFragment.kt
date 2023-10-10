@@ -1,5 +1,6 @@
 package jp.co.ods.nfcresister
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,11 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_nfc_card.*
 import kotlinx.coroutines.*
 
-class NfcCardCFragment: Fragment() {
-
-    companion object {
-        const val pageNumber = 2
-    }
+class NfcCardFragment(private val pageNumber :Int): Fragment() {
 
     private val nfcCardAdapter by lazy { NfcCardAdapter(requireContext()) }
     private lateinit var nfcCardDao:NfcCardDao
@@ -25,9 +22,9 @@ class NfcCardCFragment: Fragment() {
         return inflater.inflate(R.layout.fragment_nfc_card, container, false)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //ここから初期化処理(ActivityでいうところのonCreate)
 
         //削除アイコンが押されたら、そのままActivityへ通知
         nfcCardAdapter.onClickRemove = {
@@ -58,6 +55,7 @@ class NfcCardCFragment: Fragment() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onResume() {
         super.onResume()
         Log.d("Fragment_onResume", "FragmentのonResume")
