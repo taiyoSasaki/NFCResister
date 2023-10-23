@@ -11,12 +11,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_nfc_card.*
 import kotlinx.coroutines.*
 
-class NfcCardFragment(private val pageNumber :Int): Fragment() {
+class NfcCardFragment: Fragment() {
 
     private val nfcCardAdapter by lazy { NfcCardAdapter(requireContext()) }
     private lateinit var nfcCardDao:NfcCardDao
 
     private var itemList = arrayListOf<NfcCard>()
+    private var pageNumber: Int? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        pageNumber = arguments?.getInt("pageNumber")
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_nfc_card, container, false)
@@ -71,6 +78,16 @@ class NfcCardFragment(private val pageNumber :Int): Fragment() {
 
         nfcCardAdapter.setItemList(itemList)
         recyclerView.adapter?.notifyDataSetChanged()
+    }
+
+    companion object {
+        fun newInstance(pageNumber :Int): NfcCardFragment {
+            val fragment = NfcCardFragment()
+            val page = Bundle()
+            page.putInt("pageNumber", pageNumber)
+            fragment.arguments = page
+            return fragment
+        }
     }
 
 }

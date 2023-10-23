@@ -10,7 +10,7 @@
         android:layout_width="250dp"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="名前"
+        android:text="@string/fragment_card_name"
         android:textSize="25sp"
         android:background="@color/blue"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="カード番号"
+        android:text="@string/fragment_card_id"
         android:textSize="25sp"
         android:background="@color/light_blue"
         app:layout_constraintStart_toEndOf="@+id/name"
@@ -33,11 +33,11 @@
         android:layout_width="250dp"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:tint="#FF5581"
         android:src="@drawable/ic_remove_card"
         android:background="@color/blue"
         app:layout_constraintEnd_toEndOf="parent"
-        android:padding="5dp"/>
+        android:padding="5dp"
+        app:tint="#FF5581" />
 
     <View
         android:layout_width="match_parent"

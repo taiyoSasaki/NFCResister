@@ -20,6 +20,7 @@ class MyBroadcastReceiver : BroadcastReceiver() {
             for (item in list) {
                 if (item.idm == requestData) {
                     resData = numberToUpperCaseLetter(item.page) ?: ""
+                    break
                 }
             }
 

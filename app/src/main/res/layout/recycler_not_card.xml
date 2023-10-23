@@ -9,6 +9,6 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:textSize="30sp"
-        android:text="カードは登録されていません" />
+        android:text="@string/fragment_not_card" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

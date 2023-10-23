@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="jp.co.ods.nfcresister">
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -30,11 +31,14 @@
         <receiver
             android:name=".MyBroadcastReceiver"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true"
+            android:permission="TODO"
+            tools:ignore="ExportedReceiver">
             <intent-filter>
-                <action android:name="ods.NFC_ID_CHECK" /> <!-- リクエストアプリと同じアクション名を指定 -->
+                <action android:name="ods.NFC_ID_CHECK" />
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>

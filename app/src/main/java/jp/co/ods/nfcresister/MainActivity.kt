@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         //最大ページ分を追加
         for (i in 0 until maxPage+1) {
-            val fragment = NfcCardFragment(i)
+            val fragment = NfcCardFragment.newInstance(i)
             viewPagerAdapter.addFragment(fragment)
         }
 
@@ -81,12 +81,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        //ページ追加ボタン
+        //タブ追加ボタン
         tab_page_add.setOnClickListener {
             val newPage = viewPager2.adapter!!.itemCount
             Log.d("tab_page_add", "newPage = $newPage")
             if (newPage < 10) { //10ページまで追加できるようにする
-                val newFragment = NfcCardFragment(newPage)
+                val newFragment = NfcCardFragment.newInstance(newPage)
                 viewPagerAdapter.addFragment(newFragment)
 
                 //新しいタブを追加

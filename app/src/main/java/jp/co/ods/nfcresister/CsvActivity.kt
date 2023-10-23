@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.opencsv.CSVWriter
-
 import kotlinx.android.synthetic.main.activity_csv.*
 import kotlinx.coroutines.*
 import java.io.FileWriter
@@ -52,16 +51,20 @@ class CsvActivity : AppCompatActivity() {
                 .setTitle("csvファイルの読み込み")
                 .setMessage("csvファイルを読み込むと、現在保存されているカード情報がすべて削除されます。よろしいですか？")
                 .setPositiveButton("OK") { _, _ ->
-                    //パーミッションの状態確認
-                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                        //許可されている
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) { //Androidバージョンが12以下
+                        //パーミッションの状態確認
+                        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                            //許可されている
+                            openReadCsv()
+                        } else {
+                            //許可されていないのでダイアログを表示する
+                            requestPermissions(
+                                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                                PERMISSIONS_REQUEST_CODE
+                            )
+                        }
+                    } else { //Androidバージョンが13以上
                         openReadCsv()
-                    } else {
-                        //許可されていないのでダイアログを表示する
-                        requestPermissions(
-                            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                            PERMISSIONS_REQUEST_CODE
-                        )
                     }
                 }
                 .setNeutralButton("キャンセル", null)
@@ -110,7 +113,7 @@ class CsvActivity : AppCompatActivity() {
                         var errFlag = false
                         var nfcCard = NfcCard(0, 0, "", "")
                         try {
-                            nfcCard = NfcCard(page = cells[0].toInt(), label = cells[1], idm = cells[2])
+                            nfcCard = NfcCard(page = cells[0].replace("\uFEFF", "").trim().toInt(), label = cells[1], idm = cells[2])
                         } catch (e : Exception) {
                             e.printStackTrace()
                             errFlag = true
@@ -141,7 +144,6 @@ class CsvActivity : AppCompatActivity() {
             rowList.add(row)
         }
 
-        rowList.add(arrayOf("0", "ALSOK", "123456789"))
         Log.d("csvOutput", "rowList -> $rowList")
 
         //csvファイルを書き込む

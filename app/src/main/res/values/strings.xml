@@ -1,11 +1,24 @@
 <resources>
     <string name="app_name">NFCResister</string>
 
+    <!-- 共通文字列 -->
+    <string name="back_button">戻る</string>
+
     <!-- ホーム画面用文字列 -->
     <string name="home_title">NFCカードの登録/編集ができます\n追加は＋、削除は⊖をおしてください</string>
-    <string name="tab_title_A">機能A</string>
-    <string name="tab_title_B">機能B</string>
-    <string name="tab_title_C">機能C</string>
+
+    <!-- フラグメント用文字列 -->
+    <string name="fragment_not_card">カードは登録されていません</string>
+    <string name="fragment_card_name">名前</string>
+    <string name="fragment_card_id">カード番号(id)</string>
+    <string name="fragment_card_remove">削除</string>
+
+    <!-- カード登録画面用文字列 -->
+    <string name="resister_label">登録したいカードをかざしてください</string>
+
+    <!-- CSVインプット/アウトプット画面用の文字列 -->
+    <string name="csv_import">csvのインポート</string>
+    <string name="csv_output">csvのアウトプット</string>
 
 
 </resources>
